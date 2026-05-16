@@ -110,6 +110,15 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(circle
 .btn-reset-10:active{transform:translateY(2px);box-shadow:0 1px 0 #FFAAAA;}
 
 .hidden{display:none!important;}
+
+.feedback-overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:999;pointer-events:none;opacity:0;transition:opacity .1s;}
+.feedback-overlay.show{opacity:1;}
+.feedback-circle{width:220px;height:220px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:100px;transform:scale(0);transition:transform .25s cubic-bezier(.34,1.56,.64,1);}
+.feedback-overlay.show .feedback-circle{transform:scale(1);}
+.feedback-overlay.ok-ov{background:rgba(78,203,161,0.25);}
+.feedback-overlay.ok-ov .feedback-circle{background:#4ECBA1;}
+.feedback-overlay.ng-ov{background:rgba(255,123,123,0.25);}
+.feedback-overlay.ng-ov .feedback-circle{background:#FF7B7B;}
 </style>
 </head>
 <body>
@@ -174,6 +183,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(circle
     <button class="btn-reset-10" onclick="reset10()">🔁 Start over</button>
   </div>
 
+  <div class="feedback-overlay" id="fov"><div class="feedback-circle" id="fci"></div></div>
 </div>
 
 <script>
@@ -223,6 +233,38 @@ function reset10(){
 }
 
 function currentList(){return mode==='all'?allList:tenList;}
+
+function playBeep(ok){
+  try{
+    const ac=new(window.AudioContext||window.webkitAudioContext)();
+    if(ok){
+      [[523,0],[659,.12],[784,.24]].forEach(([f,t])=>{
+        const o=ac.createOscillator(),g=ac.createGain();
+        o.connect(g);g.connect(ac.destination);
+        o.frequency.value=f;o.type='sine';
+        g.gain.setValueAtTime(.35,ac.currentTime+t);
+        g.gain.exponentialRampToValueAtTime(.001,ac.currentTime+t+.25);
+        o.start(ac.currentTime+t);o.stop(ac.currentTime+t+.3);
+      });
+    } else {
+      const o=ac.createOscillator(),g=ac.createGain();
+      o.connect(g);g.connect(ac.destination);
+      o.frequency.value=160;o.type='sawtooth';
+      g.gain.setValueAtTime(.3,ac.currentTime);
+      g.gain.exponentialRampToValueAtTime(.001,ac.currentTime+.4);
+      o.start();o.stop(ac.currentTime+.45);
+    }
+  }catch(e){}
+}
+
+function showFeedback(ok){
+  const ov=document.getElementById('fov');
+  const ci=document.getElementById('fci');
+  ci.textContent=ok?'✅':'❌';
+  ov.className='feedback-overlay '+(ok?'ok-ov':'ng-ov')+' show';
+  playBeep(ok);
+  setTimeout(()=>{ov.className='feedback-overlay';},900);
+}
 
 function buildKeyboard(){
   const kb=document.getElementById('keyboard');
@@ -329,6 +371,7 @@ function checkAnswer(){
     const cheers=['Amazing! 🎉','You got it! 🌟','Brilliant! 🏆','Correct! 🎊','Super star! ⭐'];
     msg.textContent=cheers[Math.floor(Math.random()*cheers.length)];
     msg.className='result-msg ok';
+    showFeedback(true);
     if(!checked[cur]){score++;checked[cur]=true;}
     document.getElementById('score-badge').textContent=`⭐ ${score}`;
   } else {
@@ -336,6 +379,7 @@ function checkAnswer(){
     const tries=['Try again! 💪','Almost! 🤔','Keep going! 🐝','You can do it! 🌈'];
     msg.textContent=tries[Math.floor(Math.random()*tries.length)];
     msg.className='result-msg no';
+    showFeedback(false);
   }
 }
 
