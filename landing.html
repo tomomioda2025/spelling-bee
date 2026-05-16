@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🐝 Spelling Bee — K2 Practice</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+body{font-family:'Nunito',sans-serif;background:#FFFDF5;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 20px;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(circle at 20% 20%,#FFE4A044 0%,transparent 50%),radial-gradient(circle at 80% 80%,#4ECBA122 0%,transparent 50%);pointer-events:none;}
+.card{position:relative;z-index:1;max-width:420px;width:100%;display:flex;flex-direction:column;align-items:center;}
+.bee{font-size:80px;animation:float 3s ease-in-out infinite;display:block;margin-bottom:8px;}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
+.title{font-family:'Baloo 2',cursive;font-size:38px;font-weight:800;color:#E5A000;text-align:center;line-height:1.1;}
+.subtitle{font-family:'Baloo 2',cursive;font-size:16px;font-weight:700;color:#9A8060;text-align:center;margin-top:4px;margin-bottom:32px;letter-spacing:1px;}
+.btn-play{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:22px;background:#FFB800;border:none;border-radius:20px;box-shadow:0 6px 0 #E5A000;font-family:'Baloo 2',cursive;font-size:24px;font-weight:800;color:#3D2C00;cursor:pointer;text-decoration:none;transition:transform .1s,box-shadow .1s;margin-bottom:40px;}
+.btn-play:active{transform:translateY(4px);box-shadow:0 2px 0 #E5A000;}
+.divider{width:100%;display:flex;align-items:center;gap:12px;margin-bottom:28px;}
+.divider-line{flex:1;height:1.5px;background:#FFE4A0;}
+.divider-text{font-size:12px;font-weight:700;color:#C8B080;white-space:nowrap;}
+.install-title{font-family:'Baloo 2',cursive;font-size:16px;font-weight:800;color:#3D2C00;text-align:center;margin-bottom:16px;}
+.install-cards{display:flex;flex-direction:column;gap:12px;width:100%;}
+.install-card{background:white;border-radius:16px;border:2px solid #FFE4A0;padding:16px 18px;}
+.install-card-header{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+.install-card-icon{font-size:22px;}
+.install-card-title{font-family:'Baloo 2',cursive;font-size:15px;font-weight:800;color:#3D2C00;}
+.steps{display:flex;flex-direction:column;gap:6px;}
+.step{display:flex;align-items:flex-start;gap:10px;}
+.step-num{width:22px;height:22px;border-radius:50%;background:#FFB800;color:#3D2C00;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.step-text{font-size:14px;font-weight:700;color:#5A4020;line-height:1.4;}
+.step-text span{color:#E5A000;font-weight:800;}
+.footer{margin-top:32px;font-size:12px;color:#C8B080;text-align:center;}
+</style>
+</head>
+<body>
+<div class="card">
+  <span class="bee">🐝</span>
+  <h1 class="title">Spelling Bee</h1>
+  <p class="subtitle">K2 Spelling Practice</p>
+
+  <a class="btn-play" href="https://tomomioda2025.github.io/spelling-bee/index.html">
+    ▶ Play now!
+  </a>
+
+  <div class="divider">
+    <div class="divider-line"></div>
+    <div class="divider-text">📱 Add to Home Screen</div>
+    <div class="divider-line"></div>
+  </div>
+
+  <p class="install-title">Save as an app on your phone!</p>
+
+  <div class="install-cards">
+    <div class="install-card">
+      <div class="install-card-header">
+        <span class="install-card-icon">🍎</span>
+        <span class="install-card-title">iPhone / iPad</span>
+      </div>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-text">Open the game in <span>Safari</span></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-text">Tap the <span>Share</span> button at the bottom</div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-text">Tap <span>"Add to Home Screen"</span></div></div>
+      </div>
+    </div>
+    <div class="install-card">
+      <div class="install-card-header">
+        <span class="install-card-icon">🤖</span>
+        <span class="install-card-title">Android</span>
+      </div>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-text">Open the game in <span>Chrome</span></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-text">Tap the <span>⋮ menu</span> at the top right</div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-text">Tap <span>"Add to Home Screen"</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <p class="footer">🐝 Free • No login needed • Works offline</p>
+</div>
+</body>
+</html>
