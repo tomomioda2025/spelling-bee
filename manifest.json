@@ -1,6 +1,6 @@
 {
-  "name": "Spelling Bee",
-  "short_name": "Spelling Bee",
+  "name": "Spelling Bee 2",
+  "short_name": "Spelling Bee 2",
   "description": "K2 Spelling Bee practice game",
   "start_url": "./index.html",
   "display": "standalone",
